@@ -1,0 +1,88 @@
+---
+output:
+  html_document: default
+  word_document: default
+---
+set.seed(123)
+
+sim<- rexp(10000,rate = 0.0001)
+
+hist(sim,main = 'Simulated random values of exp', col = 'red' )
+```{r}
+for(i in 1:10){
+  print(seq(1,5))
+}
+```
+```{r}
+x<- rexp(500,0.001)
+hist(x)
+
+```
+
+
+
+mean_sim<- mean(sim)
+
+var_sim<- var(sim)
+
+#Theoritical values of mean and Variance
+
+T_mean<- 1/0.0001
+
+T_var<- 1/0.0001^2
+
+T_mean
+T_var
+
+M<- 20000
+
+y<- pmin(sim,M)
+z<- pmax(0,sim-M)
+
+mean_y<- mean(y)
+
+mean_z <- mean(z)
+
+
+z.mean <- function(M) {
+  z <- pmax(0,sim-M)
+  z.mean<- mean(z)
+}
+
+z.var<- function(M){
+  z<- pmax(0,sim-M)
+  z.var<- var(z)
+}
+
+z_5000_var<-z.var(5000)
+mean_sim
+var_sim
+
+T_mean
+
+T_var
+
+z_5000
+
+
+y.mean<- function(M){
+  y<- pmin(sim,M)
+  y.mean<- mean(y)
+}
+y.var<- function(M){
+  y<- pmin(sim,M)
+  y.var<- var(y)
+}
+
+M_vector<- c(5000,10000,30000,40000,50000)
+
+y_mean<- y.mean(M_vector) 
+y_var<- y.var(M_vector)
+
+z_mean<- z.mean(M_vector)
+z_var<- z.var(M_vector)
+
+y_mean
+y_var
+z_mean
+z_var
